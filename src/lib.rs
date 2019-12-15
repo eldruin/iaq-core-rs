@@ -46,7 +46,7 @@ use embedded_hal as hal;
 
 mod device_impl;
 mod types;
-pub use crate::types::Error;
+pub use crate::types::{Error, Measurement};
 
 /// iAQ-Core device driver
 #[derive(Debug)]

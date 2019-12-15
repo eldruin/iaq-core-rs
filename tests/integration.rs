@@ -1,4 +1,4 @@
-use iaq_core::Error;
+use iaq_core::{Error, Measurement};
 mod common;
 use crate::common::{destroy, new, DEV_ADDR};
 use embedded_hal_mock::i2c::Transaction as I2cTrans;
@@ -52,5 +52,22 @@ fn can_get_tvoc() {
 fn can_get_resistance() {
     let mut sensor = new(&[I2cTrans::read(DEV_ADDR, vec![0, 0, 0, 0, 0x12, 0x34, 0x56])]);
     assert_eq!(0x123456, sensor.resistance().unwrap());
+    destroy(sensor);
+}
+
+#[test]
+fn can_get_measurement() {
+    let mut sensor = new(&[I2cTrans::read(
+        DEV_ADDR,
+        vec![0x1A, 0x1B, 0, 0, 0x2A, 0x2B, 0x2C, 0x3A, 0x3B],
+    )]);
+    assert_eq!(
+        Measurement {
+            co2: 0x1A1B,
+            tvoc: 0x3A3B,
+            resistance: 0x2A2B2C,
+        },
+        sensor.data().unwrap()
+    );
     destroy(sensor);
 }

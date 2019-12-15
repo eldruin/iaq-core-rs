@@ -1,4 +1,4 @@
-use crate::{hal::blocking::i2c::Read, Error, IaqCore};
+use crate::{hal::blocking::i2c::Read, Error, IaqCore, Measurement};
 use nb;
 
 const DEV_ADDR: u8 = 0x5A;
@@ -15,6 +15,19 @@ where
     /// Destroy driver instance, return I²C bus instance.
     pub fn destroy(self) -> I2C {
         self.i2c
+    }
+
+    /// Get all data from the sensor measurement
+    ///
+    /// Returns `nb::Error::WouldBlock` in case the device reports a busy or warm up status.
+    pub fn data(&mut self) -> nb::Result<Measurement, Error<E>> {
+        let mut data = [0; 9];
+        self.read(&mut data)?;
+        Ok(Measurement {
+            co2: (u16::from(data[0]) << 8) | u16::from(data[1]),
+            tvoc: (u16::from(data[7]) << 8) | u16::from(data[8]),
+            resistance: (u32::from(data[4]) << 16) | (u32::from(data[5]) << 8) | u32::from(data[6]),
+        })
     }
 
     /// Get the CO2 (ppm) equivalent prediction value

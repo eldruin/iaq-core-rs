@@ -8,3 +8,14 @@ pub enum Error<E> {
     /// non-realistic values, and the sensor element is probably defective.
     Device,
 }
+
+/// Sensor measurement data
+#[derive(Debug, Default, Clone, Copy, PartialEq)]
+pub struct Measurement {
+    /// CO2 (ppm) equivalent prediction value
+    pub co2: u16,
+    /// TVOC (ppb) equivalent prediction value
+    pub tvoc: u16,
+    /// Sensor resistance in Ohm
+    pub resistance: u32,
+}
