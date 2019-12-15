@@ -37,6 +37,16 @@ where
         Ok((u16::from(data[7]) << 8) | u16::from(data[8]))
     }
 
+    /// Get the sensor resistance in Ohm
+    ///
+    /// Returns `nb::Error::WouldBlock` in case the device reports a busy or warm up status.
+    pub fn resistance(&mut self) -> nb::Result<u32, Error<E>> {
+        let mut data = [0; 7];
+        self.i2c.read(DEV_ADDR, &mut data).map_err(Error::I2C)?;
+        Self::check_status(data[2])?;
+        Ok((u32::from(data[4]) << 16) | (u32::from(data[5]) << 8) | u32::from(data[6]))
+    }
+
     fn check_status(status: u8) -> nb::Result<(), Error<E>> {
         if status == 0x80 {
             Err(nb::Error::Other(Error::Device))

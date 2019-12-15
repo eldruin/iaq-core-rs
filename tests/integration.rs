@@ -47,3 +47,10 @@ fn can_get_tvoc() {
     assert_eq!(0x1234, sensor.tvoc().unwrap());
     destroy(sensor);
 }
+
+#[test]
+fn can_get_resistance() {
+    let mut sensor = new(&[I2cTrans::read(DEV_ADDR, vec![0, 0, 0, 0, 0x12, 0x34, 0x56])]);
+    assert_eq!(0x123456, sensor.resistance().unwrap());
+    destroy(sensor);
+}
