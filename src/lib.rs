@@ -9,12 +9,12 @@
 //! - Read the CO2 equivalent prediction value in ppm. See: [`co2()`].
 //! - Read the TVOC equivalent prediction value in ppb. See: [`tvoc()`].
 //! - Read the sensor resistance in Ohm. See: [`resistance()`].
-//! 
+//!
 //! [`data()`]: struct.IaqCore.html#method.data
 //! [`co2()`]: struct.IaqCore.html#method.co2
 //! [`tvoc()`]: struct.IaqCore.html#method.tvoc
 //! [`resistance()`]: struct.IaqCore.html#method.resistance
-//! 
+//!
 //! <!-- TODO
 //! [Introductory blog post](TODO)
 //! -->
@@ -46,6 +46,71 @@
 //! - [Datasheet](TODO)
 //! - [Programming and interfacing guide](TODO)
 //!
+//! ## Usage examples (see also examples folder)
+//!
+//! To use this driver, import this crate and an `embedded_hal` implementation,
+//! then create an instance of the driver.
+//!
+//! Please find additional examples using hardware in this repository: [driver-examples]
+//!
+//! [driver-examples]: https://github.com/eldruin/driver-examples
+//!
+//! ### Create an instance of the driver and print the measurements
+//!
+//! ```no_run
+//! use iaq_core::IaqCore;
+//! use linux_embedded_hal::I2cdev;
+//! use nb::block;
+//!
+//! # fn main() {
+//! let dev = I2cdev::new("/dev/i2c-1").unwrap();
+//! let mut sensor = IaqCore::new(dev);
+//! loop {
+//!     let data = block!(sensor.data()).unwrap();
+//!     println!(
+//!         "CO2: {} ppm, TVOC: {} ppm, Resistance: {} Ohm",
+//!         data.co2, data.tvoc, data.resistance
+//!     );
+//! }
+//! # }
+//! ```
+//!
+//! ### Get the CO2 and TVOC prediction values independently
+//!
+//! In case you are only interested in one of them, for example.
+//!
+//! ```no_run
+//! use iaq_core::IaqCore;
+//! use linux_embedded_hal::I2cdev;
+//! use nb::block;
+//!
+//! # fn main() {
+//! let dev = I2cdev::new("/dev/i2c-1").unwrap();
+//! let mut sensor = IaqCore::new(dev);
+//! loop {
+//!     let co2 = block!(sensor.co2()).unwrap();
+//!     let tvoc = block!(sensor.tvoc()).unwrap();
+//!     println!("CO2: {} ppm, TVOC: {} ppb", co2, tvoc);
+//! }
+//! # }
+//! ```
+//!
+//! ### Get only the raw sensor resistance value
+//!
+//! ```no_run
+//! use iaq_core::IaqCore;
+//! use linux_embedded_hal::I2cdev;
+//! use nb::block;
+//!
+//! # fn main() {
+//! let dev = I2cdev::new("/dev/i2c-1").unwrap();
+//! let mut sensor = IaqCore::new(dev);
+//! loop {
+//!     let r = block!(sensor.resistance()).unwrap();
+//!     println!("Resistance: {} Ohm", r);
+//! }
+//! # }
+//! ```
 
 #![deny(unsafe_code, missing_docs)]
 #![no_std]
