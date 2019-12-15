@@ -1,4 +1,4 @@
-//! This is a platform agnostic Rust driver for the iAQ-Core sesor
+//! This is a platform agnostic Rust driver for the iAQ-Core sensors
 //! to measure VOC levels and provide CO2 equivalent and TVOC
 //! equivalent predictions using the [`embedded-hal`] traits.
 //!
