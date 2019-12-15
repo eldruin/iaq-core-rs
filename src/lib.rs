@@ -4,9 +4,17 @@
 //!
 //! [`embedded-hal`]: https://github.com/rust-embedded/embedded-hal
 //!
-//! <!--TODO
 //! This driver allows you to:
-//! -->
+//! - Read all the sensor data at once. See: [`data()`].
+//! - Read the CO2 equivalent prediction value in ppm. See: [`co2()`].
+//! - Read the TVOC equivalent prediction value in ppb. See: [`tvoc()`].
+//! - Read the sensor resistance in Ohm. See: [`resistance()`].
+//! 
+//! [`data()`]: struct.IaqCore.html#method.data
+//! [`co2()`]: struct.IaqCore.html#method.co2
+//! [`tvoc()`]: struct.IaqCore.html#method.tvoc
+//! [`resistance()`]: struct.IaqCore.html#method.resistance
+//! 
 //! <!-- TODO
 //! [Introductory blog post](TODO)
 //! -->

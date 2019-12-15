@@ -10,9 +10,12 @@
 This is a platform agnostic Rust driver for the iAQ-Core indoor air quality sensors
 using the [`embedded-hal`] traits.
 
-<!--TODO
 This driver allows you to:
--->
+- Read all the sensor data at once. See: `data()`.
+- Read the CO2 equivalent prediction value in ppm. See: `co2()`.
+- Read the TVOC equivalent prediction value in ppb. See: `tvoc()`.
+- Read the sensor resistance in Ohm. See: `resistance()`.
+
 <!-- TODO
 [Introductory blog post]()
 -->
