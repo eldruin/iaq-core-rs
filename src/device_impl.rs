@@ -1,4 +1,4 @@
-use IaqCore;
+use crate::IaqCore;
 
 impl<I2C> IaqCore<I2C> {
     /// Create new instance of the iAQ-Core device.

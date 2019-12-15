@@ -1,8 +1,5 @@
-extern crate embedded_hal_mock as hal;
-extern crate iaq_core;
-
 mod common;
-use common::{destroy, new};
+use crate::common::{destroy, new};
 
 #[test]
 fn can_create_and_destroy() {

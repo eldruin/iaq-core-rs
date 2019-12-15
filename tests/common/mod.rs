@@ -1,4 +1,4 @@
-use hal::i2c::{Mock as I2cMock, Transaction as I2cTrans};
+use embedded_hal_mock::i2c::{Mock as I2cMock, Transaction as I2cTrans};
 use iaq_core::IaqCore;
 
 pub fn new(transactions: &[I2cTrans]) -> IaqCore<I2cMock> {

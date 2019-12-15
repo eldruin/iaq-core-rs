@@ -42,11 +42,11 @@
 #![deny(unsafe_code, missing_docs)]
 #![no_std]
 
-extern crate embedded_hal as hal;
+use embedded_hal as hal;
 
 mod device_impl;
 mod types;
-pub use types::Error;
+pub use crate::types::Error;
 
 /// iAQ-Core device driver
 #[derive(Debug)]
