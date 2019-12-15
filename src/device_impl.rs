@@ -22,8 +22,7 @@ where
     /// Returns `nb::Error::WouldBlock` in case the device reports a busy or warm up status.
     pub fn co2(&mut self) -> nb::Result<u16, Error<E>> {
         let mut data = [0; 3];
-        self.i2c.read(DEV_ADDR, &mut data).map_err(Error::I2C)?;
-        Self::check_status(data[2])?;
+        self.read(&mut data)?;
         Ok((u16::from(data[0]) << 8) | u16::from(data[1]))
     }
 
@@ -32,8 +31,7 @@ where
     /// Returns `nb::Error::WouldBlock` in case the device reports a busy or warm up status.
     pub fn tvoc(&mut self) -> nb::Result<u16, Error<E>> {
         let mut data = [0; 9];
-        self.i2c.read(DEV_ADDR, &mut data).map_err(Error::I2C)?;
-        Self::check_status(data[2])?;
+        self.read(&mut data)?;
         Ok((u16::from(data[7]) << 8) | u16::from(data[8]))
     }
 
@@ -42,9 +40,13 @@ where
     /// Returns `nb::Error::WouldBlock` in case the device reports a busy or warm up status.
     pub fn resistance(&mut self) -> nb::Result<u32, Error<E>> {
         let mut data = [0; 7];
-        self.i2c.read(DEV_ADDR, &mut data).map_err(Error::I2C)?;
-        Self::check_status(data[2])?;
+        self.read(&mut data)?;
         Ok((u32::from(data[4]) << 16) | (u32::from(data[5]) << 8) | u32::from(data[6]))
+    }
+
+    fn read(&mut self, data: &mut [u8]) -> nb::Result<(), Error<E>> {
+        self.i2c.read(DEV_ADDR, data).map_err(Error::I2C)?;
+        Self::check_status(data[2])
     }
 
     fn check_status(status: u8) -> nb::Result<(), Error<E>> {
