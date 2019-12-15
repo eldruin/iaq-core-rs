@@ -37,3 +37,13 @@ fn can_get_co2() {
     assert_eq!(0x1234, sensor.co2().unwrap());
     destroy(sensor);
 }
+
+#[test]
+fn can_get_tvoc() {
+    let mut sensor = new(&[I2cTrans::read(
+        DEV_ADDR,
+        vec![0, 0, 0, 0, 0, 0, 0, 0x12, 0x34],
+    )]);
+    assert_eq!(0x1234, sensor.tvoc().unwrap());
+    destroy(sensor);
+}
