@@ -43,8 +43,8 @@
 //! where space is at a premium.
 //!
 //! Documentation:
-//! - [Datasheet](TODO)
-//! - [Programming and interfacing guide](TODO)
+//! - [Datasheet](https://ams.com/documents/20143/36005/iAQ-core_DS000334_1-00.pdf)
+//! - [Factsheet](https://ams.com/documents/20143/36005/iAQ-core_FS000136_1-00.pdf)
 //!
 //! ## Usage examples (see also examples folder)
 //!
