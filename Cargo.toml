@@ -1,0 +1,34 @@
+[package]
+name = "iaq-core"
+version = "0.1.0"
+authors = ["Diego Barrios Romero <eldruin@gmail.com>"]
+repository = "https://github.com/eldruin/iaq-core-rs"
+license = "MIT OR Apache-2.0"
+description = "Platform-agnostic Rust driver for the iAQ-Core indoor air quality sensor. Compatible with iAQ-Core-C and iAQ-Core-P."
+readme = "README.md"
+keywords = ["indoor", "air", "quality", "sensor", "embedded-hal-driver"]
+categories = ["embedded", "hardware-support", "no-std"]
+homepage = "https://github.com/eldruin/iaq-core-rs"
+documentation = "https://docs.rs/iaq-core"
+include = [
+    "/**/*.rs",
+    "/Cargo.toml",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE-MIT",
+    "/LICENSE-APACHE",
+]
+
+[badges]
+travis-ci = { repository = "eldruin/iaq-core-rs", branch = "master" }
+coveralls = { repository = "eldruin/iaq-core-rs", branch = "master", service = "github" }
+
+[dependencies]
+embedded-hal = "0.2"
+
+[dev-dependencies]
+linux-embedded-hal = "0.2"
+embedded-hal-mock = "0.7"
+
+[profile.release]
+lto = true
