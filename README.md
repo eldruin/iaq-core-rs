@@ -1,9 +1,7 @@
 # Rust iAQ-Core Indoor Air Quality Sensor Driver
 
-<!-- TODO
 [![crates.io](https://img.shields.io/crates/v/iaq-core.svg)](https://crates.io/crates/iaq-core)
 [![Docs](https://docs.rs/iaq-core/badge.svg)](https://docs.rs/iaq-core)
--->
 [![Build Status](https://travis-ci.com/eldruin/iaq-core-rs.svg?branch=master)](https://travis-ci.com/eldruin/iaq-core-rs)
 [![Coverage Status](https://coveralls.io/repos/github/eldruin/iaq-core-rs/badge.svg?branch=master)](https://coveralls.io/github/eldruin/iaq-core-rs?branch=master)
 
