@@ -1,5 +1,4 @@
 use crate::{hal::blocking::i2c::Read, Error, IaqCore, Measurement};
-use nb;
 
 const DEV_ADDR: u8 = 0x5A;
 

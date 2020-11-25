@@ -2,7 +2,6 @@ use iaq_core::{Error, Measurement};
 mod common;
 use crate::common::{destroy, new, DEV_ADDR};
 use embedded_hal_mock::i2c::Transaction as I2cTrans;
-use nb;
 
 #[test]
 fn can_create_and_destroy() {
