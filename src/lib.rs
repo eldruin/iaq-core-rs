@@ -115,8 +115,6 @@
 #![deny(unsafe_code, missing_docs)]
 #![no_std]
 
-use embedded_hal as hal;
-
 mod device_impl;
 mod types;
 pub use crate::types::{Error, Measurement};

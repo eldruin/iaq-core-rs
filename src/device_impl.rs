@@ -1,4 +1,5 @@
-use crate::{hal::blocking::i2c::Read, Error, IaqCore, Measurement};
+use crate::{Error, IaqCore, Measurement};
+use embedded_hal::blocking::i2c::Read;
 
 const DEV_ADDR: u8 = 0x5A;
 
@@ -57,7 +58,10 @@ where
     }
 
     fn read(&mut self, data: &mut [u8]) -> nb::Result<(), Error<E>> {
-        self.i2c.read(DEV_ADDR, data).map_err(Error::I2C).map_err(nb::Error::Other)?;
+        self.i2c
+            .read(DEV_ADDR, data)
+            .map_err(Error::I2C)
+            .map_err(nb::Error::Other)?;
         Self::check_status(data[2])
     }
 
