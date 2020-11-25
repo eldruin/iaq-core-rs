@@ -58,7 +58,7 @@ where
     }
 
     fn read(&mut self, data: &mut [u8]) -> nb::Result<(), Error<E>> {
-        self.i2c.read(DEV_ADDR, data).map_err(Error::I2C)?;
+        self.i2c.read(DEV_ADDR, data).map_err(Error::I2C).map_err(nb::Error::Other)?;
         Self::check_status(data[2])
     }
 
